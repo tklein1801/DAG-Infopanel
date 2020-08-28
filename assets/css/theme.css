@@ -1,0 +1,307 @@
+/* Import files */
+@import url(./loader.css);
+
+/* Fonts */
+@font-face {
+  font-family: "Product Sans Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Product Sans Regular"), url("../fonts/ProductSans-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Product Sans Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Product Sans Italic"), url("../fonts/ProductSans-Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Product Sans Thin Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Product Sans Thin Regular"), url("../fonts/ProductSans-Thin.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Product Sans Light Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Product Sans Light Regular"), url("../fonts/ProductSans-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Product Sans Medium Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Product Sans Medium Regular"), url("../fonts/ProductSans-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Product Sans Black Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Product Sans Black Regular"), url("../fonts/ProductSans-Black.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Product Sans Thin Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Product Sans Thin Italic"), url("../fonts/ProductSans-ThinItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Product Sans Light Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Product Sans Light Italic"),
+    url("../fonts/ProductSans-LightItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Product Sans Medium Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Product Sans Medium Italic"),
+    url("../fonts/ProductSans-MediumItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Product Sans Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Product Sans Bold"), url("../fonts/ProductSans-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Product Sans Bold Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Product Sans Bold Italic"), url("../fonts/ProductSans-BoldItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Product Sans Black Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Product Sans Black Italic"),
+    url("../fonts/ProductSans-BlackItalic.woff") format("woff");
+}
+
+/* General */
+html,
+body {
+  font-family: "Product Sans Light Regular";
+  color: #bdbdbb;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 0.5em;
+}
+::-webkit-scrollbar-track {
+  background-color: #212121;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(51, 51, 51);
+  border-radius: 5px;
+}
+
+/* Selection */
+::selection {
+  background: #df691a;
+  color: #fff;
+}
+::-moz-selection {
+  background: #df691a;
+  color: #fff;
+}
+
+/* Typography */
+.text {
+  transition: all 0.3s ease 0s;
+  color: #bdbdbb;
+}
+.text-light {
+  color: #bdbdbd !important;
+}
+.text-white {
+  color: #fff !important;
+}
+.text:hover {
+  color: #fff;
+}
+.link {
+  transition: all 0.3s ease 0s;
+  text-decoration: underline #bdbdbd;
+  color: #bdbdbb;
+}
+.link:hover {
+  color: #df691a;
+}
+.font-weight-bold {
+  font-family: "Product Sans Medium Regular";
+  font-weight: 500 !important;
+}
+.text.font-weight-bold,
+.title,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #fff;
+}
+
+/* Main-sidebar */
+.main-sidebar {
+  background-color: #212121;
+  box-shadow: rgb(0, 0, 0) 0px 0px 20px;
+}
+.main-sidebar .brand-text {
+  text-decoration: none;
+}
+.main-sidebar .nav-item > .nav-link.active {
+  background-color: #df691a !important;
+  color: #fff !important;
+}
+
+/* Main-header */
+.main-header {
+  background-color: #df691a;
+  border-bottom-color: #df691a;
+}
+
+/* Main-Footer */
+.main-footer {
+  background-color: #111111;
+  border-top-color: #111111;
+  box-shadow: rgb(0, 0, 0) 0px 0px 20px;
+}
+.main-footer a {
+  text-decoration: underline #bdbdbb;
+  color: #bdbdbb;
+}
+.main-footer a:hover {
+  text-decoration: underline #df691a;
+  color: #df691a;
+}
+
+/* Breadcrumb */
+.breadcrumb .breadcrumb-item.active {
+  color: #bdbdbb;
+}
+.breadcrumb .breadcrumb-item > a {
+  text-decoration: underline #bdbdbb;
+  color: #bdbdbd;
+}
+.breadcrumb .breadcrumb-item > a:hover {
+  text-decoration: underline #df691a;
+  color: #df691a;
+}
+
+/* Content-wrapper */
+.content-wrapper {
+  background-color: #1a1a1a;
+}
+
+/* Cards */
+.card {
+  background-color: #212121;
+  /* box-shadow: rgb(0, 0, 0) 0px 0px 20px; */
+}
+.card.card-title,
+.card.title {
+  color: #fff;
+}
+.card.text {
+  color: #bdbdbd;
+}
+.card.card-outline.card-outline-success {
+  border-color: #df691a;
+}
+
+/* Form */
+.form-control {
+  resize: none;
+  padding: 0.5rem 1rem;
+  background-color: #111111;
+  border-width: 2px;
+  border-color: #111111;
+  color: white;
+  box-shadow: rgb(0, 0, 0) 0px 0px 5px;
+}
+.form-control:active,
+.form-control:focus {
+  background-color: #111111;
+  border-width: 2px;
+  border-color: #df691a;
+  color: #df691a;
+}
+
+/* Callout */
+.callout {
+  background-color: #212121;
+  /* box-shadow: rgb(0, 0, 0) 0px 0px 20px; */
+  border-left-width: 3px;
+  border-left-color: #df691a;
+  color: #bdbdbd;
+}
+.callout a {
+  text-decoration: underline #bdbdbd;
+  color: #bdbdbb;
+}
+.callout a:hover {
+  text-decoration: underline #df691a;
+  color: #df691a;
+}
+
+/* Nav-pills */
+.nav.nav-pills .nav-item {
+  color: #fff;
+}
+.nav.nav-pills .nav-item:hover {
+  color: #df691a;
+}
+.nav.nav-pills .nav-item.active {
+  background-color: #df691a;
+  color: #fff;
+}
+
+/* Tables */
+.table th,
+.table td {
+  white-space: nowrap;
+}
+
+/* Modals */
+.modal .modal-content {
+  background-color: #212121;
+}
+.modal .modal-header .close {
+  color: #df691a;
+  text-shadow: 0 1px 0 #df691a;
+}
+
+/* Button */
+.btn.btn-warning {
+  background-color: #df691a !important;
+  border-color: #df691a !important;
+  color: #fff !important;
+}
+.btn.btn-outline-warning {
+  border-color: #df691a !important;
+  color: #df691a !important;
+}
+.btn.btn-outline-warning:hover,
+.btn.btn-outline-warning:focus {
+  background-color: #df691a;
+  color: #fff !important;
+}
+
+/* Background-colors */
+.bg-orange {
+  background-color: #df691a !important;
+}
