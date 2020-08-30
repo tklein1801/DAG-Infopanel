@@ -1,104 +1,19 @@
 /* Import files */
 @import url(./loader.css);
-
-/* Fonts */
-@font-face {
-  font-family: "Product Sans Regular";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Product Sans Regular"), url("../fonts/ProductSans-Regular.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Product Sans Italic";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Product Sans Italic"), url("../fonts/ProductSans-Italic.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Product Sans Thin Regular";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Product Sans Thin Regular"), url("../fonts/ProductSans-Thin.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Product Sans Light Regular";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Product Sans Light Regular"), url("../fonts/ProductSans-Light.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Product Sans Medium Regular";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Product Sans Medium Regular"), url("../fonts/ProductSans-Medium.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Product Sans Black Regular";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Product Sans Black Regular"), url("../fonts/ProductSans-Black.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Product Sans Thin Italic";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Product Sans Thin Italic"), url("../fonts/ProductSans-ThinItalic.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Product Sans Light Italic";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Product Sans Light Italic"),
-    url("../fonts/ProductSans-LightItalic.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Product Sans Medium Italic";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Product Sans Medium Italic"),
-    url("../fonts/ProductSans-MediumItalic.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Product Sans Bold";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Product Sans Bold"), url("../fonts/ProductSans-Bold.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Product Sans Bold Italic";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Product Sans Bold Italic"), url("../fonts/ProductSans-BoldItalic.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Product Sans Black Italic";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Product Sans Black Italic"),
-    url("../fonts/ProductSans-BlackItalic.woff") format("woff");
-}
+@import url(./font.css);
+@import url(./toast.css);
 
 /* General */
 html,
 body {
+  height: 100%;
   font-family: "Product Sans Light Regular";
   color: #bdbdbb;
 }
-
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 0.5em;
+  height: 0.5rem;
 }
 ::-webkit-scrollbar-track {
   background-color: #212121;
@@ -239,6 +154,31 @@ h6 {
   border-width: 2px;
   border-color: #df691a;
   color: #df691a;
+}
+.form-group .input-group {
+  background-color: #111111;
+  color: white;
+  border-width: 2px;
+  border-color: #111111;
+  box-shadow: rgb(0, 0, 0) 0px 0px 5px;
+}
+.form-group .input-group .form-control {
+  resize: none;
+  padding: 0.5rem 1rem;
+  background-color: #111111;
+  box-shadow: none;
+  border-width: 2px;
+  border-right-width: 0px;
+  border-color: #111111;
+  color: white;
+}
+.form-group .input-group .input-group-text {
+  padding: 0.5rem 1rem;
+  background-color: #111111;
+  border-width: 2px;
+  border-left-width: 0px;
+  border-color: #111111;
+  color: white;
 }
 
 /* Callout */
