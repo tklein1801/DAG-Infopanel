@@ -34,12 +34,13 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Starter Page</h1>
+              <h1 class="m-0">Gang</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Starter Page</li>
+                <li class="breadcrumb-item"><a href="<?php echo $url_host; ?>">Infopanel</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo $url_host . "Dashboard/"; ?>">Dashboard</a></li>
+                <li class="breadcrumb-item active">Gang</li>
               </ol>
             </div>
           </div>
@@ -50,14 +51,14 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-7 col-12">
+            <div id="gang_money" class="col-md-7 col-12">
               <div class="card card-outline card-orange">
                 <div class="card-header border-0">
                   <p class="card-title font-weight-bold">
                     Gangkasse: <small class="text-success"> 50.000 €</small>
                   </p>
                   <div class="card-tools">
-                    <button class="btn btn-tool">
+                    <button class="btn btn-tool" data-toggle="modal" data-target="#add-transaction-modal">
                       <i class="fas fa-plus"></i>
                     </button>
                   </div>
@@ -73,46 +74,7 @@
                           <th>Betrag</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr class="text-center">
-                          <td>
-                            <p class="text mb-0" data-toggle="tooltip" title="05:17 Uhr">
-                              12.08.2020
-                            </p>
-                          </td>
-                          <td>
-                            <p class="text mb-0"><i>Kaution</i></p>
-                          </td>
-                          <td>
-                            <p class="text mb-0">
-                              <img class="img-circle img-size-32 mr-2" src="./assets/img/avatar.jpg" alt="User avatar" />
-                              Alexander Pierce
-                            </p>
-                          </td>
-                          <td>
-                            <p class="text text-danger mb-0">- 50.000 €</p>
-                          </td>
-                        </tr>
-                        <tr class="text-center">
-                          <td>
-                            <p class="text mb-0" data-toggle="tooltip" title="03:24 Uhr">
-                              12.08.2020
-                            </p>
-                          </td>
-                          <td>
-                            <p class="text mb-0"><i>HK 416 Team Barbie</i></p>
-                          </td>
-                          <td>
-                            <p class="text mb-0">
-                              <img class="img-circle img-size-32 mr-2" src="./assets/img/avatar.jpg" alt="User avatar" />
-                              Alexander Pierce
-                            </p>
-                          </td>
-                          <td>
-                            <p class="text text-success mb-0">+ 100.000 €</p>
-                          </td>
-                        </tr>
-                      </tbody>
+                      <tbody></tbody>
                     </table>
                   </div>
                 </div>
@@ -177,6 +139,35 @@
   </div>
   <!-- ./Wrapper -->
 
+  <div id="add-transaction-modal" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title title font-weight-bold">Transaktion registrieren</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="add-transaction-form">
+          <div class="modal-body py-0">
+            <div class="form-group">
+              <label for="usage" class="text-white">Verwendungszweck</label>
+              <input type="text" name="usage" id="usage" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="amount" class="text-white">Betrag</label>
+              <input type="number" pattern="numeric" name="amount" id="amount" class="form-control" />
+            </div>
+          </div>
+          <div class="modal-footer border-0">
+            <button type="button" class="btn text" data-dismiss="modal">Abbrechen</button>
+            <input type="submit" class="btn btn-sm btn-outline-warning" value="Speichern" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- REQUIRED SCRIPTS -->
   <!-- jQuery -->
   <script src="<?php echo $dir_plugins . "jquery/jquery.min.js"; ?>"></script>
@@ -185,9 +176,69 @@
   <!-- AdminLTE App -->
   <script src="<?php echo $dir_js . "adminlte.min.js"; ?>"></script>
   <script src="<?php echo $dir_js . "loader.js"; ?>"></script>
+  <script src="<?php echo $dir_api . "gang/gang.js"; ?>"></script>
   <script>
     new Loader().init();
     document.querySelector(".main-sidebar #gang").classList.add("active");
+    const gang = new GangMoney;
+    const balance = parseInt(gang.getBalance()).toLocaleString(undefined);
+    const transactions = gang.getTransactions();
+    const moneyOuput = document.querySelector(".content #gang_money table tbody");
+    // FIXME When we have an negative number we there is an '-' in front of the number which is dark grey and not red
+    document.querySelector(".content #gang_money .card-title").innerHTML = `Gangkasse: <small class="${balance > 0 ? 'text-success' : 'text-danger'}">${balance} €</small>`;
+    for (const key in transactions) {
+      const transaction = transactions[key];
+      var rawAmount = parseInt(transaction.amount).toLocaleString(undefined);
+      var amount = rawAmount > 0 ? `<p class="text text-success mb-0">+ ${rawAmount} €</p>` : `<p class="text text-danger mb-0">${rawAmount} €</p>`;
+      var date = new Date(transaction.date);
+      moneyOuput.innerHTML += `<tr id="transaction-${transaction.id}" class="text-center">
+          <td>
+            <p class="text mb-0" data-toggle="tooltip" title="${date.getHours()}:${date.getMinutes()} Uhr">
+              ${date.getDate()}.${date.getMonth()}.${date.getFullYear()}
+            </p>
+          </td>
+          <td><p class="text mb-0"><i>${transaction.reason}</i></p></td>
+          <td>
+            <p class="text mb-0">
+              <img class="img-circle img-size-32 mr-2" src="${transaction.avatar_url}" alt="Avatar of ${transaction.username}" />
+              ${transaction.username}
+            </p>
+          </td>
+          <td>${amount}</td>
+        </tr>`;
+    }
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $("#add-transaction-modal").on("show.bs.modal", function(e) {
+      const modal = this,
+        form = this.querySelector("#add-transaction-form");
+
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const formData = {
+          user: 1, // FIXME Get userId
+          usage: this.querySelector("#usage").value,
+          amount: parseInt(this.querySelector("#amount").value)
+        };
+        let res = gang.registerTransaction(formData.user, formData.usage, formData.amount);
+        if (res.error == null) {
+          // TODO Display new transaction
+          const newBalance = parseInt(gang.getBalance()).toLocaleString(undefined);
+          document.querySelector(".content #gang_money .card-title").innerHTML = `Gangkasse: <small class="${newBalance > 0 ? 'text-success' : 'text-danger'}">${newBalance} €</small>`;
+        } else {
+          console.error(res.error);
+        }
+        $(modal).modal("hide");
+        form.reset();
+      })
+    });
+
+    $("#add-transaction-modal").on("hide.bs.modal", function(e) {
+      const modal = this,
+        form = this.querySelector("#add-transaction-form");
+      form.reset();
+    });
   </script>
 </body>
 
