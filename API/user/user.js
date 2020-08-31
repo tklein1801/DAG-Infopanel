@@ -149,4 +149,20 @@ class User {
     });
     return data;
   }
+
+  getSession() {
+    let data;
+    $.ajax({
+      url: this.api + "getSession.php",
+      async: false,
+      method: "GET",
+      success: (res) => {
+        data = res;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+    return data;
+  }
 }
