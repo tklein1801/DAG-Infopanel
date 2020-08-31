@@ -10,9 +10,9 @@
         <img src="<?php echo $other_logo; ?>" class="img-circle elevation-2" alt="User Image" />
       </div>
       <div class="info">
-        <a href="#" class="d-block">
+        <a href="<?php echo $url_host . "API/user/logout.php"; ?>" class="d-block">
           <i class="fas fa-sign-out-alt"></i>
-          Benutzername
+          <?php echo $_SESSION['login']['username']; ?>
         </a>
       </div>
     </div>
