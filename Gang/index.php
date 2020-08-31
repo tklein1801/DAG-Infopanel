@@ -65,7 +65,7 @@
                 </div>
                 <div class="card-body p-0">
                   <div class="table-responsive table-borderless">
-                    <table class="table mb-0">
+                    <table class="table table-hover mb-0">
                       <thead>
                         <tr class="text-center">
                           <th>Datum</th>
@@ -177,10 +177,14 @@
   <script src="<?php echo $dir_js . "adminlte.min.js"; ?>"></script>
   <script src="<?php echo $dir_js . "loader.js"; ?>"></script>
   <script src="<?php echo $dir_api . "gang/gang.js"; ?>"></script>
+  <script src="<?php echo $dir_api . "user/user.js"; ?>"></script>
+  <script src="<?php echo $dir_api . "avatar/avatar.js"; ?>"></script>
   <script>
     new Loader().init();
     document.querySelector(".main-sidebar #gang").classList.add("active");
     const gang = new GangMoney;
+    const user = new User;
+    const userData = user.getSession();
     const balance = parseInt(gang.getBalance()).toLocaleString(undefined);
     const transactions = gang.getTransactions();
     const moneyOuput = document.querySelector(".content #gang_money table tbody");
@@ -217,15 +221,35 @@
         e.preventDefault();
 
         const formData = {
-          user: 1, // FIXME Get userId
+          user: userData.userId,
           usage: this.querySelector("#usage").value,
           amount: parseInt(this.querySelector("#amount").value)
         };
         let res = gang.registerTransaction(formData.user, formData.usage, formData.amount);
         if (res.error == null) {
-          // TODO Display new transaction
+          const now = new Date();
           const newBalance = parseInt(gang.getBalance()).toLocaleString(undefined);
+          var amount =
+            formData.amount > 0 ?
+            `<p class="text text-success mb-0">+ ${formData.amount.toLocaleString(undefined)} €</p>` :
+            `<p class="text text-danger mb-0">${formData.amount.toLocaleString(undefined)} €</p>`;
+          const userAvatar = new Avatar().get(userData.userId).avatar_url;
           document.querySelector(".content #gang_money .card-title").innerHTML = `Gangkasse: <small class="${newBalance > 0 ? 'text-success' : 'text-danger'}">${newBalance} €</small>`;
+          moneyOuput.innerHTML = `<tr id="transaction-${res.inserted_id}" class="text-center">
+              <td>
+                <p class="text mb-0" data-toggle="tooltip" title="${now.getHours()}:${now.getMinutes()} Uhr">
+                  ${now.getDate()}.${now.getMonth()}.${now.getFullYear()}
+                </p>
+              </td>
+              <td><p class="text mb-0"><i>${formData.usage}</i></p></td>
+              <td>
+                <p class="text mb-0">
+                  <img class="img-circle img-size-32 mr-2" src="${userAvatar}" alt="Avatar of ${userData.username}" />
+                  ${userData.username}
+                </p>
+              </td>
+              <td>${amount}</td>
+            </tr>` + moneyOuput.innerHTML;
         } else {
           console.error(res.error);
         }
