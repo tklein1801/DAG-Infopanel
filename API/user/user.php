@@ -11,7 +11,7 @@ class User
     $insert->bind_param("iisss", $tool_access, $role, $username, hash("md5", $password), $email);
     $insert->execute();
 
-    echo json_encode(array('inserted_id' => $insert->insert_id, 'error' => $insert->error == "" ? null : $insert->error), JSON_PRETTY_PRINT);
+    return array('inserted_id' => $insert->insert_id, 'error' => $insert->error == "" ? null : $insert->error);
     $insert->close();
     $db->close();
   }
@@ -24,7 +24,7 @@ class User
     $insert->bind_param("iisssi", $tool_access, $role, $username, hash("md5", $password), $email, $user);
     $insert->execute();
 
-    echo json_encode(array('inserted_id' => $insert->insert_id, 'error' => $insert->error == "" ? null : $insert->error), JSON_PRETTY_PRINT);
+    return array('inserted_id' => $insert->insert_id, 'error' => $insert->error == "" ? null : $insert->error);
     $insert->close();
     $db->close();
   }
@@ -37,7 +37,7 @@ class User
     $delete->bind_param("i", $user);
     $delete->execute();
 
-    echo json_encode(array('inserted_id' => $delete->insert_id, 'error' => $delete->error == "" ? null : $delete->error), JSON_PRETTY_PRINT);
+    return array('inserted_id' => $delete->insert_id, 'error' => $delete->error == "" ? null : $delete->error);
     $delete->close();
     $db->close();
   }
@@ -52,7 +52,7 @@ class User
       $arr = $data;
     }
 
-    echo json_encode($arr, JSON_PRETTY_PRINT);
+    return $arr;
     $select->close();
     $db->close();
   }
@@ -67,7 +67,7 @@ class User
       $arr[] = $data;
     }
 
-    echo json_encode($arr, JSON_PRETTY_PRINT);
+    return $arr;
     $select->close();
     $db->close();
   }
@@ -82,16 +82,16 @@ class User
     if ($select->num_rows > 0) {
       $select = $db->query("SELECT `id` FROM `tool_user` WHERE `username` = '" . $username . "' AND `password` = '" . $hashedPw . "'");
       if ($select->num_rows > 0) {
-        echo json_encode(array('login' => true, 'reason' => null), JSON_PRETTY_PRINT);
         while ($data = $select->fetch_assoc()) {
           session_start();
           $_SESSION['login'] = array('userId' => $data['id'], 'username' => $username);
         }
+        return array('login' => true, 'reason' => null);
       } else {
-        echo json_encode(array('login' => false, 'reason' => 'Das Passwort ist falsch!'), JSON_PRETTY_PRINT);
+        return array('login' => false, 'reason' => 'Das Passwort ist falsch!');
       }
     } else {
-      echo json_encode(array('login' => false, 'reason' => 'Der Benutzer ist nicht registriert!'), JSON_PRETTY_PRINT);
+      return array('login' => false, 'reason' => 'Der Benutzer ist nicht registriert!');
     }
 
     $select->close();

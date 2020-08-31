@@ -5,5 +5,5 @@ header('Content-Type: application/json; charset=utf-8');
 require "gang.php";
 
 $gang = new GangMoney;
-print_r($gang->deleteTransaction($_POST['transaction']));
+echo json_encode($gang->deleteTransaction($_POST['transaction']), JSON_PRETTY_PRINT);
 ?>

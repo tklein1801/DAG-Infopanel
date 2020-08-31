@@ -11,7 +11,7 @@ class GangMoney
     $insert->bind_param("isi", $sender, $reason, $amount);
     $insert->execute();
 
-    echo json_encode(array('inserted_id' => $insert->insert_id, 'error' => $insert->error == "" ? null : $insert->error), JSON_PRETTY_PRINT);
+    return array('inserted_id' => $insert->insert_id, 'error' => $insert->error == "" ? null : $insert->error);
     $insert->close();
     $db->close();
   }
@@ -26,7 +26,7 @@ class GangMoney
       $arr[] = $data;
     }
 
-    echo json_encode($arr, JSON_PRETTY_PRINT);
+    return $arr;
     $select->close;
     $db->close;
   }
