@@ -7,7 +7,7 @@
   <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex border-0">
       <div class="image">
-        <img src="<?php echo $other_logo; ?>" class="img-circle elevation-2" alt="User Image" />
+        <img src="<?php echo $user_avatar['avatar_url']; ?>" class="img-circle elevation-2" alt="User Image" />
       </div>
       <div class="info">
         <a href="<?php echo $url_host . "API/user/logout.php"; ?>" class="d-block">

@@ -27,4 +27,7 @@ if ($_SERVER['REQUEST_URI'] !== "/Login/") {
   if (!isset($_SESSION['login'])) {
     header("Location: " . $url_host . "Login/");
   }
+  require __DIR__ . "/API/avatar/avatar.php";
+  $av = new Avatar();
+  $user_avatar = $av->get(($_SESSION['login']['userId']));
 }
