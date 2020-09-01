@@ -19,7 +19,7 @@ $comp_sidebar = $dir_components . "sidebar.php";
 $comp_footer = $dir_components . "footer.php";
 
 // Other
-$other_theme_color = "#007bff";
+$other_theme_color = "#df691a";
 $other_logo = $dir_images . "logo.jpg";
 
 // Check if the user is logged in
