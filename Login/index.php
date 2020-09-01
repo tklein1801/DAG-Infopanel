@@ -10,7 +10,7 @@
   <meta property="og:image" content="<?php echo $other_logo; ?>" />
   <meta name="description" content="Infopanel der DulliAG" />
   <meta property="og:type" content="website" />
-  <title>Infopanel | Login</title>
+  <title>Infopanel • Login</title>
   <link rel="icon" href="<?php echo $other_logo; ?>" />
   <link rel="stylesheet" href="<?php echo $dir_plugins . "fontawesome-free/css/all.min.css"; ?>" />
   <link rel="stylesheet" href="<?php echo $dir_css . "adminlte.min.css"; ?>" />
