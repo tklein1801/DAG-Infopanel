@@ -251,7 +251,7 @@
           </tr>`;
       }
     } else {
-      contactOutput.innerHTML = `<tr class="text-center"><td colspan="4"><p class="text mb-0">Keine Transaktionen gefunden</p></td></tr>`;
+      contactOutput.innerHTML = `<tr class="text-center"><td colspan="4"><p class="text mb-0">Keine Kontakte gefunden</p></td></tr>`;
     }
     $('[data-toggle="tooltip"]').tooltip();
 

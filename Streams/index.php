@@ -10,7 +10,7 @@
   <meta property="og:image" content="<?php echo $other_logo; ?>" />
   <meta name="description" content="Infopanel der DulliAG" />
   <meta property="og:type" content="website" />
-  <title>Infopanel | Streams</title>
+  <title>Infopanel • Streams</title>
   <link rel="icon" href="<?php echo $other_logo; ?>" />
   <link rel="stylesheet" href="<?php echo $dir_plugins . "fontawesome-free/css/all.min.css"; ?>" />
   <link rel="stylesheet" href="<?php echo $dir_css . "adminlte.min.css"; ?>" />
@@ -38,8 +38,9 @@
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Starter Page</li>
+                <li class="breadcrumb-item"><a href="<?php echo $url_host; ?>">Infopanel</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo $url_host . "Dashboard/"; ?>">Dashboard</a></li>
+                <li class="breadcrumb-item active">Streams</li>
               </ol>
             </div>
           </div>
