@@ -569,7 +569,7 @@
                 <p class="text mb-0">${type}</p>
               </td>
               <td>
-                <button class="btn btn-sm btn-outline-warning" style="margin-top: -0.3rem;">${status}</button>
+                <button class="btn btn-sm btn-outline-warning">${status}</button>
               </td>
               <td>
                 <p class="text mb-0">${vehicle.vehicle_data.name}</p>
@@ -578,7 +578,7 @@
                 <p class="text mb-0">${side}</p>
               </td>
               <td>
-                <button class="btn btn-sm btn-outline-warning" style="margin-top: -0.3rem;">${vehicle.plate}</button>
+                <button class="btn btn-sm btn-outline-warning">${vehicle.plate}</button>
               </td>
               <td>
                 <div class="progress mt-1 rounded" data-toggle="tooltip" data-placement="top" title="${parseInt(vehicle.fuel * 100)} %">
@@ -609,7 +609,7 @@
               <p class="text mb-0">${house.id}</p>
             </td>
             <td>
-              <button class="btn btn-sm btn-outline-warning" style="margin-top: -0.3rem;">
+              <button class="btn btn-sm btn-outline-warning">
                 ${house.disabled == 1 ? "Zerstört" : "Gewartet"}
               </button>
             </td>
@@ -623,7 +623,7 @@
               <p class="text mb-0">${house.payed_for / 24} Tage</p>
             </td>
             <td>
-              <a class="btn btn-sm btn-warning" style="margin-top: -0.3rem;" href="https://info.realliferpg.de/map?x=${loc[0]}&amp;y=${loc[1]}" target="_blank"><i class="fas fa-map-marked-alt"></i></a>
+              <a class="btn btn-sm btn-warning" href="https://info.realliferpg.de/map?x=${loc[0]}&amp;y=${loc[1]}" target="_blank"><i class="fas fa-map-marked-alt"></i></a>
             </td>
           </tr>`;
       });
@@ -645,7 +645,7 @@
               <p class="text mb-0">${building.id}</p>
             </td>
             <td>
-              <button class="btn btn-sm btn-outline-warning" style="margin-top: -0.3rem;">
+              <button class="btn btn-sm btn-outline-warning">
                 ${building.disabled == 1 ? "Zerstört" : "Aktiv"}
               </button>
             </td>

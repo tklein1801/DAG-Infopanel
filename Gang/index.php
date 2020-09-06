@@ -244,7 +244,7 @@
               <p class="text mb-0">${contact.information}</p>
             </td>
             <td class="text-right">
-              <button class="btn btn-sm btn-outline-danger px-3" style="margin-top: -0.3rem;" data-contact="${contact.id}" onclick="document.querySelector('#contact-${contact.id}').remove(); contact.delete(${contact.id});">
+              <button class="btn btn-sm btn-outline-danger px-3" data-contact="${contact.id}" onclick="document.querySelector('#contact-${contact.id}').remove(); contact.delete(${contact.id});">
                 <i class="fas fa-trash-alt"></i>
               </button>
             </td>
@@ -333,7 +333,7 @@
                 <p class="text mb-0">${formData.information}</p>
               </td>
               <td class="text-right">
-                <button class="btn btn-sm btn-outline-danger px-3" style="margin-top: -0.3rem;" data-contact="${contact.id}" onclick="document.querySelector('#contact-${res.inserted_id}').remove(); contact.delete(${res.inserted_id});">
+                <button class="btn btn-sm btn-outline-danger px-3" data-contact="${contact.id}" onclick="document.querySelector('#contact-${res.inserted_id}').remove(); contact.delete(${res.inserted_id});">
                   <i class="fas fa-trash-alt"></i>
                 </button>
               </td>
