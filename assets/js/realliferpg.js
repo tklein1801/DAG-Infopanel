@@ -152,4 +152,83 @@ class ReallifeRPG {
     return data;
   }
 
+  /**
+   * @param {string} apiKey
+   */
+  getVehicles(apiKey) {
+    let data;
+    $.ajax({
+      url: this.api + "v1/player/" + apiKey + "/vehicles/",
+      async: false,
+      method: "GET",
+      dataType: "JSON",
+      success: (res) => {
+        data = res.data;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+    return data;
+  }
+
+  /**
+   * @param {string} apiKey
+   */
+  getHouses(apiKey) {
+    let data;
+    $.ajax({
+      url: this.api + "v1/player/" + apiKey,
+      async: false,
+      method: "GET",
+      dataType: "JSON",
+      success: (res) => {
+        data = res.data[0].houses;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+    return data;
+  }
+
+  /**
+   * @param {string} apiKey
+   */
+  getAppartments(apiKey) {
+    let data;
+    $.ajax({
+      url: this.api + "v1/player/" + apiKey,
+      async: false,
+      method: "GET",
+      dataType: "JSON",
+      success: (res) => {
+        data = res.data[0].rentals;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+    return data;
+  }
+
+  /**
+   * @param {string} apiKey
+   */
+  getBuildings(apiKey) {
+    let data;
+    $.ajax({
+      url: this.api + "v1/player/" + apiKey,
+      async: false,
+      method: "GET",
+      dataType: "JSON",
+      success: (res) => {
+        data = res.data[0].buildings;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+    return data;
+  }
 }
