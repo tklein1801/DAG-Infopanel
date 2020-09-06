@@ -39,7 +39,7 @@ class GangMoney
     $delete->bind_param("i", $transactionId);
     $delete->execute();
 
-    return $delete;
+    return array('affected_rows' => $delete->affected_rows, 'error' => $delete->error == "" ? null : $delete->error);
     $delete->close();
     $db->close();
   }

@@ -24,7 +24,7 @@ class Contact
     $update->bind_param("ssi", $name, $information, $contact);
     $update->execute();
 
-    return array('inserted_id' => $update->insert_id, 'error' => $update->error == "" ? null : $update->error);
+    return array('affected_rows' => $update->affected_rows, 'error' => $update->error == "" ? null : $update->error);
     $update->close();
     $db->close();
   }
@@ -37,7 +37,7 @@ class Contact
     $delete->bind_param("i", $contact);
     $delete->execute();
 
-    return array('removed_id' => $delete->insert_id, 'error' => $delete->error == "" ? null : $delete->error);
+    return array('affected_rows' => $delete->affected_rows, 'error' => $delete->error == "" ? null : $delete->error);
     $delete->close();
     $db->close();
   }

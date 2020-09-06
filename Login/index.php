@@ -99,7 +99,6 @@
       } else {
         Toast.show("error", res.reason);
       }
-      console.log(res);
     });
   </script>
 </body>
