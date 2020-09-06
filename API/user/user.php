@@ -20,12 +20,27 @@ class User
   {
     require $this->sqlPHP;
 
+    $hashedPassword = hash("md5", $password);
     $insert = $db->prepare("UPDATE `tool_user` SET `tool_access`=?, `role`=?, `username`=?, `password`=?, `email`=? WHERE `id`=?");
-    $insert->bind_param("iisssi", $tool_access, $role, $username, hash("md5", $password), $email, $user);
+    $insert->bind_param("iisssi", $tool_access, $role, $username, $hashedPassword, $email, $user);
     $insert->execute();
 
     return array('inserted_id' => $insert->insert_id, 'error' => $insert->error == "" ? null : $insert->error);
     $insert->close();
+    $db->close();
+  }
+
+  public function updatePassword(int $user, string $password)
+  {
+    require $this->sqlPHP;
+
+    $hashedPassword = hash("md5", $password);
+    $update = $db->prepare("UPDATE `tool_user` SET `password` = ? WHERE `id` = ?");
+    $update->bind_param("si", $hashedPassword, $user);
+    $update->execute();
+
+    return array('affected_rows' => $update->affected_rows, 'error' => $update->error == "" ? null : $update->error);
+    $update->close();
     $db->close();
   }
 
@@ -37,7 +52,7 @@ class User
     $delete->bind_param("i", $user);
     $delete->execute();
 
-    return array('inserted_id' => $delete->insert_id, 'error' => $delete->error == "" ? null : $delete->error);
+    return array('affected_rows' => $delete->affected_rows, 'error' => $delete->error == "" ? null : $delete->error);
     $delete->close();
     $db->close();
   }

@@ -67,6 +67,30 @@ class User {
 
   /**
    * @param {number} user
+   * @param {string} password
+   */
+  updatePassword(user, password) {
+    let data;
+    $.ajax({
+      url: this.api + "updatePassword.php",
+      async: false,
+      method: "POST",
+      data: {
+        user: user,
+        password: password,
+      },
+      success: (res) => {
+        data = res;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+    return data;
+  }
+
+  /**
+   * @param {number} user
    */
   delete(user) {
     let data;
