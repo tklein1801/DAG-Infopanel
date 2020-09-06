@@ -139,7 +139,7 @@
             </div>
             <div class="form-group">
               <label for="amount" class="text-white">Betrag</label>
-              <input type="number" pattern="numeric" name="amount" id="amount" class="form-control" />
+              <input type="number" name="amount" id="amount" class="form-control" />
             </div>
           </div>
           <div class="modal-footer border-0">
