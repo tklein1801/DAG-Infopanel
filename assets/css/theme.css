@@ -137,6 +137,9 @@ h6 {
 .card.card-outline.card-outline-success {
   border-color: #df691a;
 }
+.card .card-header .input-group {
+  width: 300px;
+}
 
 /* Form */
 .form-control {
@@ -146,7 +149,7 @@ h6 {
   border-width: 2px;
   border-color: #111111;
   color: white;
-  box-shadow: rgb(0, 0, 0) 0px 0px 5px;
+  /* box-shadow: rgb(0, 0, 0) 0px 0px 5px; */
 }
 .form-control:active,
 .form-control:focus {
@@ -160,7 +163,7 @@ h6 {
   color: white;
   border-width: 2px;
   border-color: #111111;
-  box-shadow: rgb(0, 0, 0) 0px 0px 5px;
+  /* box-shadow: rgb(0, 0, 0) 0px 0px 5px; */
 }
 .form-group .input-group .form-control {
   resize: none;
@@ -245,4 +248,10 @@ h6 {
 /* Background-colors */
 .bg-orange {
   background-color: #df691a !important;
+}
+
+@media (max-width: 650px) {
+  .card .card-header .input-group {
+    width: 200px;
+  }
 }
