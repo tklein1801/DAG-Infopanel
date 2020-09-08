@@ -37,4 +37,29 @@ class Avatar {
     });
     return data;
   }
+
+  // FIXME The file-upload is not working
+  /**
+   * @param {number} owner
+   * @param {*} avatar File
+   */
+  upload(owner, avatar) {
+    let data;
+    $.ajax({
+      url: this.api + "upload.php",
+      async: false,
+      method: "POST",
+      data: {
+        owner: owner,
+        avatar: avatar,
+      },
+      success: (res) => {
+        data = res;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+    return data;
+  }
 }
