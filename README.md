@@ -34,7 +34,7 @@
 
 #### Markt
 
-- [ ] Farmrechner
+- [x] Farmrechner
 - [x] Aktuelle Marktpreise
 - [x] TopJob
   - [x] Item-Blacklist

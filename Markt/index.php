@@ -51,6 +51,36 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
+            <div id="item-calc" class="col-12">
+              <div class="card card-outline card-warning">
+                <div class="card-header border-0">
+                  <h3 class="card-title font-weight-bold">Farmrechner</h3>
+                </div>
+                <div class="card-body pt-0">
+                  <form>
+                    <div class="row">
+                      <div class="col-6 col-md mb-3 mb-md-0">
+                        <input list="items" name="item" id="item" class="form-control" placeholder="Item" />
+                        <datalist id="items"></datalist>
+                      </div>
+                      <div class="col-6 col-md mb-3 mb-md-0">
+                        <input type="number" pattern="numeric" name="iweight" id="iweight" class="form-control" placeholder="Itemgewicht" />
+                      </div>
+                      <div class="col-6 col-md mb-3 mb-md-0">
+                        <input type="number" pattern="numeric" name="pweight" id="pweight" class="form-control" placeholder="Rucksackkapazität" />
+                      </div>
+                      <div class="col-6 col-md mb-3 mb-md-0">
+                        <input type="number" pattern="numeric" name="vweight" id="vweight" class="form-control" placeholder="Fahrzeugkapazität" />
+                      </div>
+                      <div class="col-12 col-md">
+                        <input type="submit" class="btn btn-outline-warning w-100" value="Berechnen" />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
             <div id="server-1" class="col-md-3 col-12">
               <div class="card card-outline card-orange">
                 <div class="card-header border-0 mb-0">
@@ -159,6 +189,34 @@
   </div>
   <!-- ./Wrapper -->
 
+  <div id="farm-calc-modal" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title title font-weight-bold">Farmrechner</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body py-0">
+          <table class="table table-borderless bg-0">
+            <thead>
+              <tr class="text-center">
+                <th class="pb-0">Anzahl</th>
+                <th class="pb-0">Server 1</th>
+                <th class="pb-0">Server 2</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn text" data-dismiss="modal">Abbrechen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- REQUIRED SCRIPTS -->
   <!-- jQuery -->
   <script src="<?php echo $dir_plugins . "jquery/jquery.min.js"; ?>"></script>
@@ -174,7 +232,48 @@
     new Loader().init();
     document.querySelector(".main-sidebar #market").classList.add("active");
     const rl = new ReallifeRPG();
+    const calc = document.querySelector(".content #item-calc");
+    const calcForm = calc.querySelector("form");
     const refreshMarket = document.querySelectorAll(".content .refresh-market");
+
+    var items = [rl.getMarket(1), rl.getMarket(2)];
+    items[0].map((item, index) => {
+      calcForm.querySelector("#items").innerHTML += `<option value="${item.localized}" />`;
+    });
+    calcForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const modal = document.querySelector("#farm-calc-modal");
+      let calcData = {
+        item: calcForm.querySelector("#item").value,
+        iweight: parseInt(calcForm.querySelector("#iweight").value),
+        pweight: parseInt(calcForm.querySelector("#pweight").value),
+        vweight: parseInt(calcForm.querySelector("#vweight").value),
+      };
+      items = [rl.getMarket(1), rl.getMarket(2)];
+      var itemPrice = [];
+      items.forEach((list) => {
+        list.map((item, index) => {
+          if (item.localized == calcData.item) {
+            itemPrice.push(item.price);
+          }
+        });
+      });
+      var totalCap = calcData.pweight + calcData.vweight;
+      var itemAmount = totalCap / calcData.iweight;
+      console.log(itemPrice, totalCap, calcData.item);
+      modal.querySelector("table tbody").innerHTML = `<tr class="text-center">
+          <td class="pt-0"><p class="text mb-0">${itemAmount} Stück</p></td>
+          <td class="pt-0"><p class="text mb-0">${(itemPrice[0] * itemAmount).toLocaleString(undefined)} €</p></td>
+          <td class="pt-0"><p class="text mb-0">${(itemPrice[1] * itemAmount).toLocaleString(undefined)} €</p></td>
+        </tr>`;
+      $(modal).modal("show");
+    });
+
+    $("#farm-calc-modal").on("hide.bs.modal", function(e) {
+      const modal = this;
+      modal.querySelector("table tbody").innerHTML = "";
+    })
 
     setItems(1);
     setItems(2);
