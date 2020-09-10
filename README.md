@@ -1,96 +1,74 @@
-<h1 align="center">DAG-Infoapp</h1>
+<p align="center">
+  <img src="./assets/img/login.png" style="width: 100%; height: auto; border-radius: 8px;">
+</p>
 
-# Features
+<h1 align="center">
+  Inforpanel
+</h1>
 
-<details>
-  <summary>Benutzerverwaltung</summary>
-  <ul>  
-    <li><a href="#">Benutzer verwalten</a></li>
-  </ul>
-</details>
+## :rocket: Features
 
-<details>
-  <summary>Dashboard</summary>
-  <ul>  
-    <li><a href="#">Serverliste</a></li>
-    <li><a href="#">Neuigkeiten</a></li>
-    <li><a href="#">Infoboxen</a></li>
-  </ul>
-</details>
+#### Benutzerverwaltung
 
-<details>
-  <summary>Profil</summary>
-  <ul>  
-    <li><a href="#">ReallifeRPG-Profil</a></li>  
-    <li><a href="#">Fahrzeugliste</a></>
-    <li><a href="#">Gebäude & Appartments</a></li>
-    <li>
-      <a href="#">Infopanel-Profil</a>
-      <ul>
-        <li><a href="#">Avatar hochladen</a></li>
-        <li><a href="#">Profil bearbeiten</a></li>
-        <li><a href="#">API-Key speichern</a></li>
-      </ul>
-    </li>
-  </ul>
-</details>
+- [ ] Zugriff nur für Admins & Moderatoren
+- [x] Benutzer erstellen, bearbeiten & löschen
 
-<details>
-  <summary>Markt</summary>
-  <ul>  
-    <li><a href="#">Automatischer Farmrechner</a></li>  
-    <li><a href="#">Marktpreise</a></>
-    <li>
-      <a href="#">Top-Jobs</a>
-      <ul>
-        <li><a href="#">Item-Blacklist einbauen</a></li>
-      </ul>  
-    </li>
-  </ul>
-</details>
+#### Dashboard
 
-<details>
-  <summary>Gang</summary>
-  <ul>  
-    <li><a href="#">Gangkasse</a></li>  
-    <li><a href="#">Kontakte</a></>
-  </ul>
-</details>
+- [x] Serverliste
+- [x] Neuigkeiten / Ankündigungen
+- [x] Statistiken zum Spieler
+  - Bargeld, Kontostand, Level & verfügbare Skillpunkte
 
-<details>
-  <summary>Streams</summary>
-  <ul>  
-    <li><a href="#">Twitch Streams</a></li>  
-    <li><a href="#">YouTube-Videofeed bestimmer YouTuber</a></>
-  </ul>
-</details>
+#### Profil
 
-<details>
-  <summary>Galerie</summary>
-  <ul>  
-    <li><a href="#">Bilder hochladen</a></li>  
-  </ul>
-</details>
+- [x] ReallifeRPG Spielerprofil
+- [x] Fahrzeugliste
+- [ ] Liste eigener Immobilien
+  - [x] Häuser
+  - [ ] Appartmens
+  - [x] Baustellen
+- [ ] Panel Profil
+  - [ ] Profil bearbeiten
+  - [x] API-Key lokal speichern
 
-<details>
-  <summary>Crafting</summary>
-  <ul>  
-    <li>
-      <a href="#">Craftingrechner</a>
-      <ul>
-        <li><a href="#">Waffen</a></li>  
-        <li><a href="#">Landfahrzeuge</a></li>  
-        <li><a href="#">Luftfahrzeuge</a></li>  
-        <li><a href="#">Kleidung</a></li>  
-      </ul>  
-    </li>  
-  </ul>
-</details>
+#### Markt
 
-# Installation
+- [ ] Farmrechner
+- [x] Aktuelle Marktpreise
+- [x] TopJob
+  - [x] Item-Blacklist
 
-# Dokumentation
+#### Gang
 
-# Ressourcen
+- [x] Gangkasse
+- [x] Kontaktbuch
 
+#### Streams
+
+- [x] ReallifeRPG Twitch Streams
+
+#### Galerie
+
+- [ ] Verwaltung durch Inhaber, Admins & Moderatoren
+- [x] Bilder hochladen
+- [x] Bilder löschen
+
+## :calendar: Geplante Features
+
+#### :chart_with_upwards_trend: Automatischer Farmrechner
+
+Man wählt den Server, das Item, die Kleidung sowie das Fahrzeug nur noch aus einer Liste und das Ergebnis wird automatisch berechnet.
+
+## :page_facing_up: Dokumentation
+
+Unsere **Dokumentation** findest du **[hier](https://github.com/tklein1801/DAG-Infopanel/wiki)**.
+
+## :wrench: Installation
+
+Eine Ausführliche **Anleitung** für die **Installation** kannst du **[hier](https://github.com/tklein1801/DAG-Infopanel/wiki/Installation)** finden!
+
+## :link: Ressourcen
+
+[ReallifeRPG API](https://api.realliferpg.de)
 [AdminLTE v3.0.5 & Plugins](https://github.com/ColorlibHQ/AdminLTE/releases/tag/v3.0.5)
