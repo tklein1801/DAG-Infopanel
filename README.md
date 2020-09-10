@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="./assets/img/login.png" style="width: 50%; height: auto;">
+  <img src="./assets/img/login.png" width="750px">
 </p>
 
 <h1 align="center">
-  Inforpanel
+  Infopanel
 </h1>
 
 ## :rocket: Features
