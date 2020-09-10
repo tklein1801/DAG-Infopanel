@@ -7,8 +7,9 @@ class User
   {
     require $this->sqlPHP;
 
+    $hashedPassword = hash("md5", $password);
     $insert = $db->prepare("INSERT INTO `tool_user`(`tool_access`, `role`, `username`, `password`, `email`) VALUES (?, ?, ?, ?, ?)");
-    $insert->bind_param("iisss", $tool_access, $role, $username, hash("md5", $password), $email);
+    $insert->bind_param("iisss", $tool_access, $role, $username, $hashedPassword, $email);
     $insert->execute();
 
     return array('inserted_id' => $insert->insert_id, 'error' => $insert->error == "" ? null : $insert->error);
@@ -16,13 +17,12 @@ class User
     $db->close();
   }
 
-  public function update(int $user, int $tool_access, int $role, string $username, string $password, string $email)
+  public function update(int $user, int $tool_access, int $role, string $username, string $email)
   {
     require $this->sqlPHP;
 
-    $hashedPassword = hash("md5", $password);
-    $insert = $db->prepare("UPDATE `tool_user` SET `tool_access`=?, `role`=?, `username`=?, `password`=?, `email`=? WHERE `id`=?");
-    $insert->bind_param("iisssi", $tool_access, $role, $username, $hashedPassword, $email, $user);
+    $insert = $db->prepare("UPDATE `tool_user` SET `tool_access`=?, `role`=?, `username`=?, `email`=? WHERE `id`=?");
+    $insert->bind_param("iissi", $tool_access, $role, $username, $email, $user);
     $insert->execute();
 
     return array('inserted_id' => $insert->insert_id, 'error' => $insert->error == "" ? null : $insert->error);
@@ -77,7 +77,7 @@ class User
     require $this->sqlPHP;
 
     $arr = array();
-    $select = $db->query("SELECT tool_user.id, tool_user.tool_access, tool_user.username, tool_user.password, tool_user.email, tool_roles.role, tool_avatar.avatar_url FROM tool_user INNER JOIN tool_roles ON tool_user.role = tool_roles.id INNER JOIN tool_avatar ON tool_user.id = tool_avatar.owner");
+    $select = $db->query("SELECT tool_user.id, tool_user.tool_access, tool_user.username, tool_user.password, tool_user.email, tool_roles.role, tool_avatar.avatar_url FROM tool_user INNER JOIN tool_roles ON tool_user.role = tool_roles.id INNER JOIN tool_avatar ON tool_user.id = tool_avatar.owner ORDER BY tool_user.role DESC");
     while ($data = $select->fetch_assoc()) {
       $arr[] = $data;
     }

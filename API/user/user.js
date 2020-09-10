@@ -38,10 +38,9 @@ class User {
    * @param {number} tool_access
    * @param {number} role
    * @param {string} username
-   * @param {string} password
    * @param {string} email
    */
-  update(user, tool_access, role, username, password, email) {
+  update(user, tool_access, role, username, email) {
     let data;
     $.ajax({
       url: this.api + "update.php",
@@ -52,7 +51,6 @@ class User {
         tool_access: tool_access,
         role: role,
         username: username,
-        password: password,
         email: email,
       },
       success: (res) => {
