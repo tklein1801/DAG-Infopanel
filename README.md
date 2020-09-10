@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/img/login.png" style="width: 100%; height: auto; border-radius: 8px;">
+  <img src="./assets/img/login.png" style="width: 50%; height: auto;">
 </p>
 
 <h1 align="center">
