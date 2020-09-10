@@ -3,56 +3,37 @@ class Gallery
 {
   public $sqlPHP = "../sql.php";
 
-  public function uplaoad(int $owner, string $heading, $image)
-  {
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-    require $this->sqlPHP;
-
-    $res = array();
-    $fileName = basename($image['name']);
-    $tmpFile = basename($image['tmp_name']);
-    $tarLoc = "/var/www/vhosts/dulliag.de/info.dulliag.de/assets/img/gallery/" . $fileName;
-    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-    $fileURL = "https://info.dulliag.de/assets/img/gallery/" . $fileName;
-    $res = array('inserted_id' => null, 'error' => $fileName . $tmpFile);
-    if (move_uploaded_file($tmpFile, $tarLoc)) {
-      $insert = $db->prepare("INSERT INTO `tool_gallery`(`owner`, `heading`, `file_name`, `file_extension`, `file_url`) VALUES (?, ?, ?, ?, ?)");
-      $insert->bind_param("issss", $owner, $heading, $fileName, $fileExtension, $fileURL);
-      $insert->execute();
-      $res = array('inserted_id' => $insert->insert_id, 'error' => $insert->error == "" ? null : $insert->error);
-      $res = array('inserted_id' => null, 'error' => null);
-    } else {
-      $res = array('inserted_id' => null, 'error' => 'Dateiupload gescheitert');
-    }
-
-    return $res;
-    $insert->close();
-    $db->close();
-  }
-
   public function upload(int $owner, string $heading, $image)
   {
     require $this->sqlPHP;
+    require_once "../../config.php";
 
     $arr = array();
     $file_name = basename($image['name']);
     $tmp_file_name = $image['tmp_name'];
     $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-    $tar_loc = "/var/www/vhosts/dulliag.de/info.dulliag.de/assets/img/gallery/";
-    $file_url = "https://info.dulliag.de/assets/img/gallery/" . $file_name;
-    if (move_uploaded_file($tmp_file_name, $tar_loc . $file_name)) {
-      $insert = $db->prepare("INSERT INTO `tool_gallery`(`owner`, `heading`, `file_name`, `file_extension`, `file_url`) VALUES (?, ?, ?, ?, ?)");
-      $insert->bind_param("issss", $owner, $heading, $file_name, $file_extension, $file_url);
-      $insert->execute();
-      $res = array('inserted_id' => $insert->insert_id, 'url' => $file_url, 'error' => $insert->error == "" ? null : $insert->error);
-      $insert->close();
+    $allw_extensions = array('png', 'jpg', 'gif', 'jpeg');
+    $tar_loc = $dir_gallery . $file_name;
+    $file_url = $url_gallery . $file_name;
+    if (in_array($file_extension, $allw_extensions)) {
+      if ($image['size'] <= $gallery_max) {
+        if (move_uploaded_file($tmp_file_name, $tar_loc)) {
+          $insert = $db->prepare("INSERT INTO `tool_gallery`(`owner`, `heading`, `file_name`, `file_extension`, `file_url`) VALUES (?, ?, ?, ?, ?)");
+          $insert->bind_param("issss", $owner, $heading, $file_name, $file_extension, $file_url);
+          $insert->execute();
+          $arr = array('inserted_id' => $insert->insert_id, 'url' => $file_url, 'error' => $insert->error == "" ? null : $insert->error);
+          $insert->close();
+        } else {
+          $arr = array('inserted_id' => null, 'error' => 'Dateiupload fehlgeschlagen');
+        }
+      } else {
+        $arr = array('inserted_id' => null, 'error' => 'Das Bild ist zu groß');
+      }
     } else {
-      $res = array('inserted_id' => null, 'error' => 'Dateiupload fehlgeschlagen');
+      $arr = array('inserted_id' => null, 'error' => 'Die Datei ist kein Bild');
     }
 
-    return $res;
+    return $arr;
     $db->close();
   }
 

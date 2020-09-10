@@ -41,17 +41,41 @@ class Avatar {
   // FIXME The file-upload is not working
   /**
    * @param {number} owner
-   * @param {*} avatar File
+   * @param {*} avatar
    */
   upload(owner, avatar) {
     let data;
+    let fData = new FormData();
+    fData.append("owner", owner);
+    fData.append("avatar", avatar);
     $.ajax({
       url: this.api + "upload.php",
+      async: false,
+      processData: false,
+      contentType: false,
+      method: "POST",
+      data: fData,
+      success: (res) => {
+        data = res;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+    return data;
+  }
+
+  /**
+   * @param {number} owner
+   */
+  setDefault(owner) {
+    let data;
+    $.ajax({
+      url: this.api + "setDefault.php",
       async: false,
       method: "POST",
       data: {
         owner: owner,
-        avatar: avatar,
       },
       success: (res) => {
         data = res;

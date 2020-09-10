@@ -37,41 +37,51 @@ class Avatar
   public function upload(string $owner, $avatar)
   {
     require $this->sqlPHP;
-    // require $this->config;
-    // TODO Check if file is an image
-    // TODO Check if image is below our max-size
-    $res = array();
-    if ($avatar != null || $avatar != "") {
-      // $fileName = basename($_FILES[$avatar]['name']);
-      // $tmpFile = basename($_FILES[$avatar]['tmp_name']);
-      // $tarLoc = $dir_avatar . $fileName;
-      // $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-      // $fileURL = $url_avatar . $fileName;
-      // if ($_FILES[$avatar]['size'] <= $avatar_max) {
-      //   if (move_uploaded_file($tmpFile, $tarLoc)) {
-      //     $insert = $db->prepare("INSERT INTO `tool_avatar`(`owner`, `file_name`, `file_extension`, `avatar_url`) VALUES (?, ?, ?, ?)");
-      //     $insert->bind_param("", $owner, $fileName, $fileExtension, $fileURL);
-      //     $insert->execute();
-      //     $res = array('inserted_id' => $insert->insert_id, 'error' => $insert->error == "" ? null : $insert->error);
-      //   } else {
-      //     $res = array('inserted_id' => null, 'error' => 'Das Hochladen ist fehlgeschlagen');
-      //   }
-      // } else {
-      //   $res = array('inserted_id' => null, 'error' => 'Die Datei ist größer als x MB');
-      // }
+    require_once "../../config.php";
+
+    $arr = array();
+    $file_name = basename($avatar['name']);
+    $tmp_file_name = $avatar['tmp_name'];
+    $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+    $allw_extensions = array('png', 'jpg', 'gif', 'jpeg');
+    $tar_loc = $dir_avatar . $file_name;
+    $file_url = $url_avatar . $file_name;
+    if (in_array($file_extension, $allw_extensions)) {
+      if ($avatar['size'] <= $avatar_max) {
+        if (move_uploaded_file($tmp_file_name, $tar_loc)) {
+          $insert = $db->prepare("INSERT INTO `tool_avatar` (`owner`, `file_name`, `file_extension`, `avatar_url`) VALUES (?, ?, ?, ?)");
+          $insert->bind_param("isss", $owner, $file_name, $file_extension, $file_url);
+          $insert->execute();
+          $arr = array('inserted_id' => $insert->insert_id, 'url' => $file_url, 'error' => $insert->error == "" ? null : $insert->error);
+          $insert->close();
+        } else {
+          $arr = array('inserted_id' => null, 'error' => 'Dateiupload fehlgeschlagen');
+        }
+      } else {
+        $arr = array('inserted_id' => null, 'error' => 'Das Bild ist zu groß');
+      }
     } else {
-      // FIXME Set default avatar in the config
-      $fileName = "logo.jpg";
-      $fileExtension = "jpg";
-      // $avatarURL = $url_host . "assets/img/logo.jpg";
-      $avatarURL = "https://info.dulliag.de/assets/img/logo.jpg";
-      $insert = $db->prepare("INSERT INTO `tool_avatar` (`owner`, `file_name`, `file_extension`, `avatar_url`) VALUES (?, ?, ?, ?)");
-      $insert->bind_param("isss", $owner, $fileName, $fileExtension, $avatarURL);
-      $insert->execute();
-      $res = array('inserted_id' => $insert->insert_id, 'error' => $insert->error == "" ? null : $insert->error);
+      $arr = array('inserted_id' => null, 'error' => 'Die Datei ist kein Bild');
     }
 
-    return $res;
+    return $arr;
+    $db->close();
+  }
+
+  public function setDefault(int $owner)
+  {
+    require $this->sqlPHP;
+    require_once "../../config.php";
+
+    $file_name = "logo.jpg";
+    $file_extension = "jpg";
+    $file_url = $other_logo;
+    $insert = $db->prepare("INSERT INTO `tool_avatar` (`owner`, `file_name`, `file_extension`, `avatar_url`) VALUES (?, ?, ?, ?)");
+    $insert->bind_param("isss", $owner, $file_name, $file_extension, $file_url);
+    $insert->execute();
+    $arr = array('inserted_id' => $insert->insert_id, 'error' => $insert->error == "" ? null : $insert->error);
+
+    return $arr;
     $insert->close();
     $db->close();
   }

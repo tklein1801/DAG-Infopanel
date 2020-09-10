@@ -298,7 +298,7 @@
           if (userList.length == 0) {
             userOutput.innerHTML = "";
           }
-          let res1 = avatar.upload(res.inserted_id, null); // just setting the default avatar
+          let res1 = avatar.setDefault(res.inserted_id);
           if (res1.error == null) {
             var userAvatar = avatar.get(res1.inserted_id).avatar_url;
             var userRole;

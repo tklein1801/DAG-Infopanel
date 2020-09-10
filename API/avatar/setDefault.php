@@ -4,4 +4,4 @@ header('Content-Type: application/json; charset=utf-8');
 require "avatar.php";
 
 $avatar = new Avatar;
-echo json_encode($avatar->upload($_POST['owner'], $_FILES['avatar']), JSON_PRETTY_PRINT);
+echo json_encode($avatar->setDefault($_POST['owner']), JSON_PRETTY_PRINT);
