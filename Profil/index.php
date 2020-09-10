@@ -484,12 +484,12 @@
       document.querySelector("#refresh").addEventListener("click", function(e) {
         if (document.querySelector("#vehicles").classList.contains("active")) {
           document.querySelector(".content #vehicles table tbody").innerHTML = "";
-          displayVehicles();
+          displayVehicles(userData.key);
         } else {
           document.querySelector("#buildings #house-output").innerHTML = "";
           document.querySelector("#buildings #building-output").innerHTML = "";
-          displayHouses(profile.name);
-          displayBuildings(profile.name);
+          displayHouses(userData.key);
+          displayBuildings(userData.key);
         }
       });
 
