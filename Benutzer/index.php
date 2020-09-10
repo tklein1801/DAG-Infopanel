@@ -50,37 +50,39 @@
 
       <div class="content">
         <div class="container-fluid">
-          <div class="col">
-            <div class="card card-outline card-orange">
-              <div class="card-header border-0">
-                <p class="card-title font-weight-bold">
-                  Benutzer
-                </p>
-                <div class="card-tools">
-                  <div class="input-group">
-                    <input type="text" id="searchUser" class="form-control shadow-none" onkeyup="js:searchTable(3, 'userTable', this.id)" placeholder="Benutzer suchen">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-warning" data-toggle="modal" data-target="#add-user-modal">
-                        <i class="fas fa-user-plus"></i>
-                      </button>
+          <div class="row">
+            <div class="col">
+              <div class="card card-outline card-orange">
+                <div class="card-header border-0">
+                  <p class="card-title font-weight-bold">
+                    Benutzer
+                  </p>
+                  <div class="card-tools">
+                    <div class="input-group">
+                      <input type="text" id="searchUser" class="form-control shadow-none" onkeyup="js:searchTable(3, 'userTable', this.id)" placeholder="Benutzer suchen">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-warning" data-toggle="modal" data-target="#add-user-modal">
+                          <i class="fas fa-user-plus"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="card-body p-0">
-                <div class="table-responsive table-borderless">
-                  <table id="userTable" class="table table-hover mb-0">
-                    <thead>
-                      <tr class="text-center">
-                        <th>Id</th>
-                        <th>Panel zugriff</th>
-                        <th>Rolle</th>
-                        <th>Benutzername</th>
-                        <th>E-Mail</th>
-                      </tr>
-                    </thead>
-                    <tbody></tbody>
-                  </table>
+                <div class="card-body p-0">
+                  <div class="table-responsive table-borderless">
+                    <table id="userTable" class="table table-hover mb-0">
+                      <thead>
+                        <tr class="text-center">
+                          <th>Id</th>
+                          <th>Panel zugriff</th>
+                          <th>Rolle</th>
+                          <th>Benutzername</th>
+                          <th>E-Mail</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
